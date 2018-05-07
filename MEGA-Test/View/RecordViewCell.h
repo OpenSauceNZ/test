@@ -10,5 +10,8 @@
 
 
 @interface RecordViewCell : UITableViewCell
-//@property (nonatomic) UILabel *
+@property (nonatomic) UILabel *title;
+@property (nonatomic) UILabel *subTitle;
+@property (nonatomic) UILabel *amount;
+@property (nonatomic) UILabel *currency;
 @end

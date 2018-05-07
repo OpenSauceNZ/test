@@ -22,19 +22,34 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    // Test Code
+    Category *category1 = [[Category alloc] init];
+    category1.categoryId = [NSNumber numberWithInt:0];
+    category1.name = @"Default";
+    category1.budget = [NSNumber numberWithInt:50000];
+    category1.color = [NSNumber numberWithInt:0];
+    [self.realm beginWriteTransaction];
+    [self.realm addOrUpdateObject:category1];
+    [self.realm commitWriteTransaction];
+    
     Category *category = [[Category alloc] init];
-    category.categoryId = [NSNumber numberWithInt:0];
-    category.name = @"Default";
+    category.categoryId = [NSNumber numberWithInt:1];
+    category.name = @"Other";
+    category.budget = [NSNumber numberWithInt:10000];
     category.color = [NSNumber numberWithInt:0];
     [self.realm beginWriteTransaction];
     [self.realm addOrUpdateObject:category];
     [self.realm commitWriteTransaction];
+    // End
+    
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
     self.title = @"Category";
+    self.tabBarController.navigationItem.rightBarButtonItem = nil;
 }
 
 @end

@@ -29,6 +29,7 @@
 {
     [super viewDidAppear:animated];
     self.title = @"Graph";
+    self.tabBarController.navigationItem.rightBarButtonItem = nil;
 }
 
 @end

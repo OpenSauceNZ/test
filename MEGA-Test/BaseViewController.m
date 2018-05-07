@@ -21,7 +21,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
 
     UIBarButtonItem *addTransactionButton = [[UIBarButtonItem alloc] initWithTitle:@"Add" style:UIBarButtonItemStylePlain target:self action:@selector(addTransaction)];
-    self.tabBarController.navigationItem.rightBarButtonItem = addTransactionButton;
+    self.tabBarController.navigationItem.leftBarButtonItem = addTransactionButton;
 }
 
 - (void)viewDidLoad
@@ -34,11 +34,12 @@
 - (void)addTransaction
 {
     EditViewController *vc = [[EditViewController alloc] init];
-    vc.modalPresentationStyle = UIModalPresentationFormSheet;
-    vc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
     
-    vc.preferredContentSize = CGSizeMake(350, 380);
-    [self.navigationController presentViewController:vc animated:YES completion:nil];
+    nav.modalPresentationStyle = UIModalPresentationFormSheet;
+    nav.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    nav.preferredContentSize = CGSizeMake(350, 380);
+    [self.navigationController presentViewController:nav animated:YES completion:nil];
 }
 
 - (void)setTitle:(NSString *)title

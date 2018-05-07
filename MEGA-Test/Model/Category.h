@@ -12,6 +12,7 @@
 @interface Category : RLMObject
 @property NSNumber<RLMInt> *categoryId;
 @property NSString *name;
+@property NSNumber<RLMInt> *budget;
 @property NSNumber<RLMInt> *color;
 @property (readonly) RLMLinkingObjects *owners;
 @end

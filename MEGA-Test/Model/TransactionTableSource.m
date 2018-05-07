@@ -8,11 +8,11 @@
 
 #import "TransactionTableSource.h"
 #import "RecordViewCell.h"
-#define kRecordDataCellId @"RecordDataCell"
+
 
 @implementation TransactionTableSource
 
-- (id)initDataSourceWithdArray:(NSArray *)array delegate:(id)delegate
+- (id)initDataSourceWithdArray:(RLMResults<Transaction *> *)array delegate:(id)delegate
 {
     if (self = [super init])
     {
@@ -31,13 +31,17 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 5;//self.dataSourceArray.count;
+    return self.dataSourceArray.count;
 }
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath
 {
     RecordViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kRecordDataCellId forIndexPath:indexPath];
-    cell.textLabel.text = @"haha";
+    Transaction *eachTransaction = self.dataSourceArray[indexPath.row];
+    cell.title.text = eachTransaction.name;
+    cell.subTitle.text = [NSString stringWithFormat:@"$%@", eachTransaction.date];
+    cell.amount.text = [NSString stringWithFormat:@"$%@", eachTransaction.amount];
+    cell.currency.text = eachTransaction.currency.name;
     return cell;
 }
 #pragma mark - UITableView Delegate
