@@ -15,6 +15,7 @@
 
 @property NSNumber<RLMInt> *transactionId;
 @property NSString *name;
+@property NSNumber<RLMInt> *amount;
 @property NSDate *date;
 @property NSString *note;
 @property Currency *currency;
