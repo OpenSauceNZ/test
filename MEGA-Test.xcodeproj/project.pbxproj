@@ -30,6 +30,8 @@
 		05BD09EA20A0058300E18A38 /* EditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05BD09E920A0058300E18A38 /* EditViewController.m */; };
 		05BD09ED20A005D900E18A38 /* RecordViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05BD09EC20A005D900E18A38 /* RecordViewCell.m */; };
 		05BD09F020A02C4B00E18A38 /* TransactionTableSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 05BD09EF20A02C4B00E18A38 /* TransactionTableSource.m */; };
+		05EE033320A13275005ADC08 /* EditViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EE033220A13275005ADC08 /* EditViewCell.m */; };
+		05EE033620A134BA005ADC08 /* EditTableSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EE033520A134BA005ADC08 /* EditTableSource.m */; };
 		9C0F9DE9E112B2244A10DC59 /* libPods-MEGA-Test.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BD58F6FACC58E1BC5919B48 /* libPods-MEGA-Test.a */; };
 /* End PBXBuildFile section */
 
@@ -83,6 +85,10 @@
 		05BD09EC20A005D900E18A38 /* RecordViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RecordViewCell.m; sourceTree = "<group>"; };
 		05BD09EE20A02C4B00E18A38 /* TransactionTableSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TransactionTableSource.h; sourceTree = "<group>"; };
 		05BD09EF20A02C4B00E18A38 /* TransactionTableSource.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TransactionTableSource.m; sourceTree = "<group>"; };
+		05EE033120A13275005ADC08 /* EditViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EditViewCell.h; sourceTree = "<group>"; };
+		05EE033220A13275005ADC08 /* EditViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EditViewCell.m; sourceTree = "<group>"; };
+		05EE033420A134BA005ADC08 /* EditTableSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EditTableSource.h; sourceTree = "<group>"; };
+		05EE033520A134BA005ADC08 /* EditTableSource.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EditTableSource.m; sourceTree = "<group>"; };
 		7BD58F6FACC58E1BC5919B48 /* libPods-MEGA-Test.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MEGA-Test.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -147,6 +153,8 @@
 				05BD09E6209FFF7A00E18A38 /* Currency.m */,
 				05BD09EE20A02C4B00E18A38 /* TransactionTableSource.h */,
 				05BD09EF20A02C4B00E18A38 /* TransactionTableSource.m */,
+				05EE033420A134BA005ADC08 /* EditTableSource.h */,
+				05EE033520A134BA005ADC08 /* EditTableSource.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -156,6 +164,8 @@
 			children = (
 				05BD09EB20A005D900E18A38 /* RecordViewCell.h */,
 				05BD09EC20A005D900E18A38 /* RecordViewCell.m */,
+				05EE033120A13275005ADC08 /* EditViewCell.h */,
+				05EE033220A13275005ADC08 /* EditViewCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -365,7 +375,9 @@
 				05BD09E1209FFC8500E18A38 /* Transaction.m in Sources */,
 				05BD09CD209FDD0A00E18A38 /* BaseViewController.m in Sources */,
 				05BD099F209FDC2800E18A38 /* MainViewController.m in Sources */,
+				05EE033320A13275005ADC08 /* EditViewCell.m in Sources */,
 				05BD09C4209FDCE600E18A38 /* UIScrollView+KeepLayout.m in Sources */,
+				05EE033620A134BA005ADC08 /* EditTableSource.m in Sources */,
 				05BD09ED20A005D900E18A38 /* RecordViewCell.m in Sources */,
 				05BD09C7209FDCE600E18A38 /* KeepAttribute.m in Sources */,
 				05BD09F020A02C4B00E18A38 /* TransactionTableSource.m in Sources */,
@@ -525,7 +537,10 @@
 					"$(PROJECT_DIR)/MEGA-Test/Framework",
 				);
 				INFOPLIST_FILE = "MEGA-Test/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "liguo-jiao.MEGA-TEST";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -544,7 +559,10 @@
 					"$(PROJECT_DIR)/MEGA-Test/Framework",
 				);
 				INFOPLIST_FILE = "MEGA-Test/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "liguo-jiao.MEGA-TEST";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";

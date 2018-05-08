@@ -6,7 +6,6 @@
 //  Copyright © 2018 Liguo Jiao. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import <Realm/Realm.h>
 #import "Transaction.h"
