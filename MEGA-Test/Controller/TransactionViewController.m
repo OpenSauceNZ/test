@@ -13,7 +13,6 @@
 @interface TransactionViewController () <TransactionTableDelgate>
 @property (nonatomic) UITableView *tableView;
 @property (nonatomic,strong)TransactionTableSource *datasource;
-
 @end
 
 @implementation TransactionViewController
@@ -21,15 +20,12 @@
 - (void)loadView
 {
     [super loadView];
-    
-    
-    
+
     UITableView *table = [[UITableView alloc] init];
     [self.view addSubview:table];
     table.keepVerticalInsets.equal = 0;
     table.keepHorizontalInsets.equal = 0;
     self.tableView = table;
-    
 }
 
 - (void)loadDetailsAtIndexPath:(NSIndexPath *)index
@@ -95,10 +91,14 @@
         record2.name = @"test";
         record2.date = [[NSDate alloc] init];
         record2.note = @"testtest";
-        record2.amount = [NSNumber numberWithInt:9999];
+        record2.amount = [NSNumber numberWithInt:99];
         record2.currency = [Currency objectForPrimaryKey:[NSNumber numberWithInt:0]];
+        
         RLMResults<Category *> *categories = [Category objectsWhere:@"name = 'Default'"];
-        record2.category = categories[0];
+        Category *target = categories[0];
+        target.budget = [NSNumber numberWithInt:target.budget.intValue - 99];
+        [self.realm addOrUpdateObject:target];
+        record2.category = target;
     }
 
     [self.realm addOrUpdateObject:record2];

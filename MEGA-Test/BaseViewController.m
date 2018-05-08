@@ -34,6 +34,7 @@
 - (void)addTransaction
 {
     EditViewController *vc = [[EditViewController alloc] init];
+    vc.isNewRecord = YES;
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
     
     nav.modalPresentationStyle = UIModalPresentationFormSheet;
@@ -46,5 +47,12 @@
 {
     [super setTitle:title];
     self.tabBarController.navigationItem.title = title;
+}
+
+- (void)alertError:(NSString *)title message:(NSString *)message
+{
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+    [alert addAction:[UIAlertAction actionWithTitle:@"Back" style:UIAlertActionStyleCancel handler:nil]];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 @end

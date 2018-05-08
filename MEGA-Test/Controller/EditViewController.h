@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Transaction.h"
+#import "BaseViewController.h"
 
 @interface EditViewController : UITableViewController
-
+@property (nonatomic) Transaction *transaction;
+@property (nonatomic) BOOL isNewRecord;
 @end

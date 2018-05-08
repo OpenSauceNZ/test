@@ -16,4 +16,5 @@
 
 @interface BaseViewController : UIViewController
 @property (nonatomic) RLMRealm *realm;
+
 @end
