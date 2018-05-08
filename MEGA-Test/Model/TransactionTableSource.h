@@ -12,6 +12,13 @@
 
 #define kRecordDataCellId @"RecordDataCell"
 
+typedef NS_ENUM(NSInteger, SortType)
+{
+    SortByAll = 0,
+    SortByDay,
+    SortByMonth
+};
+
 @protocol  TransactionTableDelgate <NSObject>
 @optional
 - (void)loadDetailsAtIndexPath:(NSIndexPath *)index;
@@ -23,6 +30,9 @@
 @property (nonatomic, assign) id<TransactionTableDelgate> delegate;
 @property (nonatomic, strong) RLMResults<Transaction *> *dataSourceArray;
 @property (nonatomic, strong) RLMResults<Category *> *categorySourceArray;
+@property (nonatomic, assign) SortType sorttype;
+@property (nonatomic, strong) NSArray *dayData;
+@property (nonatomic, strong) NSArray *monthData;
 
 - (id)initDataSourceWithdArray:(RLMResults<Transaction *>*)array delegate:(id)delegate;
 

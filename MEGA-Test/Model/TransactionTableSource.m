@@ -26,24 +26,98 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    switch (self.sorttype)
+    {
+        case SortByAll:
+            return 1;
+            break;
+        case SortByDay:
+            return self.dayData.count;
+            break;
+        case SortByMonth:
+            return self.monthData.count;
+            break;
+        default:
+            break;
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.dataSourceArray.count;
+    switch (self.sorttype) {
+        case SortByAll:
+            return self.dataSourceArray.count;
+            break;
+        case SortByDay:
+            return [(NSArray *)self.dayData[section][@"transactions"] count];
+            break;
+        case SortByMonth:
+            return  [(NSArray *)self.monthData[section][@"transactions"] count];
+            break;
+        default:
+            break;
+    }
 }
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return (self.sorttype > 0) ? 44:0;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    if (self.sorttype == SortByAll)
+    {
+        return nil;
+    }
+    UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 44)];
+    UILabel *lb = [[UILabel alloc]initWithFrame:CGRectMake(14, 0, 100, 44)];
+    [view addSubview:lb];
+    NSDictionary *dic;
+    switch (self.sorttype)
+    {
+        case SortByDay:
+            dic = self.dayData[section];
+            lb.text = dic[@"day"];
+            break;
+        case SortByMonth:
+            dic = self.monthData[section];
+            lb.text = dic[@"month"];
+            break;
+        default:
+            break;
+    }
+    return view;
+}
+
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath
 {
     RecordViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kRecordDataCellId forIndexPath:indexPath];
-    Transaction *eachTransaction = self.dataSourceArray[indexPath.row];
+    Transaction *eachTransaction;
+    switch (self.sorttype) {
+        case SortByAll:
+            eachTransaction = self.dataSourceArray[indexPath.row];
+            break;
+        case SortByDay:
+            eachTransaction = [(NSArray *)self.dayData[indexPath.section][@"transactions"] objectAtIndex:indexPath.row];
+            break;
+        case SortByMonth:
+            eachTransaction = [(NSArray *)self.monthData[indexPath.section][@"transactions"] objectAtIndex:indexPath.row];
+            break;
+        default:
+            break;
+    }
     cell.title.text = eachTransaction.name;
-    cell.subTitle.text = [NSString stringWithFormat:@"$%@", eachTransaction.date];
+    NSDateFormatter *fm = [[NSDateFormatter alloc]init];
+    [fm setDateFormat:@"yyy-MM-dd HH:ss"];
+    cell.subTitle.text = [fm stringFromDate:eachTransaction.date];
     cell.amount.text = [NSString stringWithFormat:@"$%@", eachTransaction.amount];
     cell.currency.text = eachTransaction.currency.name;
+    
     return cell;
 }
+
 #pragma mark - UITableView Delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -52,6 +126,71 @@
     {
         [self.delegate loadDetailsAtIndexPath:indexPath];
     }
+}
+
+- (NSArray *)monthData
+{
+    if (!_monthData)
+    {
+        NSMutableArray *holder = [NSMutableArray array];
+        NSDateFormatter *dateFormat = [[NSDateFormatter alloc]init];
+        [dateFormat setDateFormat:@"yyyy-MM"];
+        for (Transaction *each in self.dataSourceArray)
+        {
+            [holder addObject:[dateFormat stringFromDate:each.date]];
+        }
+        NSSet *set = [NSSet setWithArray:holder];
+        NSMutableArray *finalTransaction = [NSMutableArray array];
+        for (NSString *day in set)
+        {
+            NSMutableDictionary *transactions = [[NSMutableDictionary alloc]init];
+            transactions[@"transactions"] = [NSMutableArray array];
+            transactions[@"month"] = day;
+            for (Transaction *each in self.dataSourceArray)
+            {
+                if ([day isEqualToString:[dateFormat stringFromDate:each.date]])
+                {
+                    [transactions[@"transactions"] addObject:each];
+                }
+            }
+            [finalTransaction addObject:transactions];
+        }
+        _monthData = [finalTransaction copy];
+    }
+    return _monthData;
+}
+
+
+- (NSArray *)dayData
+{
+    if (!_dayData)
+    {
+        NSMutableArray *holder = [NSMutableArray array];
+        NSDateFormatter *dateFormater = [[NSDateFormatter alloc]init];
+        [dateFormater setDateFormat:@"yyy-MM-dd"];
+        for (Transaction *each in self.dataSourceArray)
+        {
+            [holder addObject:[dateFormater stringFromDate:each.date]];
+        }
+        NSSet *set = [NSSet setWithArray:holder];
+        NSMutableArray *transactions = [NSMutableArray array];
+        for (NSString *day in set)
+        {
+            NSMutableDictionary *transactionHolder = [[NSMutableDictionary alloc]init];
+            transactionHolder[@"transactions"] = [NSMutableArray array];
+            transactionHolder[@"day"] = day;
+            for (Transaction *each in self.dataSourceArray)
+            {
+                if ([day isEqualToString:[dateFormater stringFromDate:each.date]])
+                {
+                    [transactionHolder[@"transactions"] addObject:each];
+                }
+            }
+            [transactions addObject:transactionHolder];
+        }
+        _dayData = [transactions copy];
+    }
+    return _dayData;
 }
 
 @end

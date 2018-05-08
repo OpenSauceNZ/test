@@ -119,16 +119,18 @@
 {
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Transaction Record" message:@"Please choose the listing way of display transaction records" preferredStyle:UIAlertControllerStyleAlert];
     [alert addAction:[UIAlertAction actionWithTitle:@"By Day" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        
+        self.datasource.sorttype = SortByDay;
+        [self.tableView reloadData];
     }]];
     [alert addAction:[UIAlertAction actionWithTitle:@"By Month" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        
+        self.datasource.sorttype = SortByMonth;
+        [self.tableView reloadData];
     }]];
     [alert addAction:[UIAlertAction actionWithTitle:@"Show All" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        
+        self.datasource.sorttype = SortByAll;
+        [self.tableView reloadData];
     }]];
     [alert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil]];
-    
     [self presentViewController:alert animated:YES completion:nil];
 }
 
