@@ -12,6 +12,7 @@
 
 @interface EditViewController () <EditTableDelgate>
 @property (nonatomic, strong) EditTableSource *datasource;
+@property (nonatomic, weak) UIPickerView *categoryPicker;
 @end
 
 @implementation EditViewController
@@ -35,8 +36,16 @@
         self.transaction = record;
     }
     [self.tableView registerClass:[EditViewCell class] forCellReuseIdentifier:kEditTableCellId];
-    self.datasource = [[EditTableSource alloc]initDataSourceWithTransaction:self.transaction delegate:self];
+    [self.tableView registerClass:[EditViewCell class] forCellReuseIdentifier:kEditAmountCellId];
+    [self.tableView registerClass:[EditViewCell class] forCellReuseIdentifier:kEditCategoryCellId];
+    [self.tableView registerClass:[EditViewCell class] forCellReuseIdentifier:kEditSegmentTableCellId];
+    __weak __typeof__(self) weakSelf = self;
+    self.datasource = [[EditTableSource alloc] initDataSourceWithTransaction:self.transaction delegate:self];
     self.datasource.isAddNewRecord = self.isNewRecord;
+    self.datasource.callback = ^(EditViewCell *cell) {
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:weakSelf action:@selector(showCategoryPicker)];
+        [cell.contentField addGestureRecognizer:tap];
+    };
     [self.tableView setDelegate:self.datasource];
     [self.tableView setDataSource:self.datasource];
     [self.tableView reloadData];
@@ -91,7 +100,6 @@
             [self alertError:@"Error" message:@"Beyound the category budget"];
         }
     }
-    
 }
 
 - (void)cancel
@@ -104,6 +112,12 @@
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
     [alert addAction:[UIAlertAction actionWithTitle:@"Back" style:UIAlertActionStyleCancel handler:nil]];
     [self presentViewController:alert animated:YES completion:nil];
+}
+
+- (void)showCategoryPicker
+{
+    [self.tableView endEditing:YES];
+    // show category picker
 }
 
 @end

@@ -9,20 +9,24 @@
 #import <UIKit/UIKit.h>
 #import <Realm/Realm.h>
 #import "Transaction.h"
+#import "EditViewCell.h"
 
-#define kEditTableCellId @"EditTableCell"
+//typedef void(^PickerCallback)(NSInteger row, NSInteger component);
+typedef void(^CategoryCallback)(EditViewCell *cell);
 
 @protocol EditTableDelgate <NSObject>
 @optional
 - (void)loadDetailsAtIndexPath:(NSIndexPath *)index;
 @end
 
-@interface EditTableSource : NSObject <UITableViewDelegate, UITableViewDataSource>
+@interface EditTableSource : NSObject <UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate>
 
 @property (nonatomic, assign) int sectionOneRows;
 @property (nonatomic, assign) id<EditTableDelgate> delegate;
 @property (nonatomic, strong) Transaction *transaction;
 @property (nonatomic) BOOL isAddNewRecord;
+
+@property (nonatomic, copy) CategoryCallback callback;
 
 - (id)initDataSourceWithTransaction:(Transaction *)trasaction delegate:(id)delegate;
 

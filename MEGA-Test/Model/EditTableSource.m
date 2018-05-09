@@ -44,9 +44,38 @@
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath
 {
-    EditViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kEditTableCellId forIndexPath:indexPath];
+    EditViewCell *cell = [[EditViewCell alloc] init];
+    switch (indexPath.row)
+    {
+        case 1: // Amount
+            cell = [tableView dequeueReusableCellWithIdentifier:kEditAmountCellId forIndexPath:indexPath];
+            break;
+        case 2: // Currency
+            cell = [tableView dequeueReusableCellWithIdentifier:kEditSegmentTableCellId forIndexPath:indexPath];
+            break;
+        case 3:
+            {
+                cell = [tableView dequeueReusableCellWithIdentifier:kEditCategoryCellId forIndexPath:indexPath];
+                self.callback(cell);
+            }
+            break;
+        case 4: // Date
+            {
+                cell = [tableView dequeueReusableCellWithIdentifier:kEditTableCellId forIndexPath:indexPath];
+                NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+                [dateFormatter setDateFormat:@"yyy-MM-dd HH:mm"];
+                cell.contentField.userInteractionEnabled = NO;
+                cell.contentField.text = [dateFormatter stringFromDate:[NSDate date]];
+                cell.contentField.textColor = UIColor.lightGrayColor;
+            }
+            break;
+        case 0: // Name
+        case 5:
+            cell = [tableView dequeueReusableCellWithIdentifier:kEditTableCellId forIndexPath:indexPath];
+            cell.contentField.text = contents[indexPath.row] == nil ? @"": contents[indexPath.row];
+            break;
+    }
     cell.title.text = titles[indexPath.row];
-    cell.contentField.text = contents[indexPath.row] == nil ? @"": contents[indexPath.row];
     return cell;
 }
 
@@ -59,6 +88,5 @@
         [self.delegate loadDetailsAtIndexPath:indexPath];
     }
 }
-
 
 @end
