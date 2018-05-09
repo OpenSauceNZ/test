@@ -33,6 +33,8 @@
 		05EE033320A13275005ADC08 /* EditViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EE033220A13275005ADC08 /* EditViewCell.m */; };
 		05EE033620A134BA005ADC08 /* EditTableSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EE033520A134BA005ADC08 /* EditTableSource.m */; };
 		9C0F9DE9E112B2244A10DC59 /* libPods-MEGA-Test.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BD58F6FACC58E1BC5919B48 /* libPods-MEGA-Test.a */; };
+		E35A912820A2BE3C00DFF6DB /* CategoryPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E35A912720A2BE3C00DFF6DB /* CategoryPickerViewController.m */; };
+		E35A912B20A2C3EC00DFF6DB /* UIViewController+Modal.m in Sources */ = {isa = PBXBuildFile; fileRef = E35A912A20A2C3EC00DFF6DB /* UIViewController+Modal.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -90,6 +92,10 @@
 		05EE033420A134BA005ADC08 /* EditTableSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EditTableSource.h; sourceTree = "<group>"; };
 		05EE033520A134BA005ADC08 /* EditTableSource.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EditTableSource.m; sourceTree = "<group>"; };
 		7BD58F6FACC58E1BC5919B48 /* libPods-MEGA-Test.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MEGA-Test.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E35A912620A2BE3C00DFF6DB /* CategoryPickerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CategoryPickerViewController.h; sourceTree = "<group>"; };
+		E35A912720A2BE3C00DFF6DB /* CategoryPickerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CategoryPickerViewController.m; sourceTree = "<group>"; };
+		E35A912920A2C3EC00DFF6DB /* UIViewController+Modal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Modal.h"; sourceTree = "<group>"; };
+		E35A912A20A2C3EC00DFF6DB /* UIViewController+Modal.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Modal.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -183,6 +189,10 @@
 				05BD09D5209FDFE000E18A38 /* CategoryListViewController.m */,
 				05BD09E820A0058300E18A38 /* EditViewController.h */,
 				05BD09E920A0058300E18A38 /* EditViewController.m */,
+				E35A912620A2BE3C00DFF6DB /* CategoryPickerViewController.h */,
+				E35A912720A2BE3C00DFF6DB /* CategoryPickerViewController.m */,
+				E35A912920A2C3EC00DFF6DB /* UIViewController+Modal.h */,
+				E35A912A20A2C3EC00DFF6DB /* UIViewController+Modal.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -368,6 +378,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E35A912B20A2C3EC00DFF6DB /* UIViewController+Modal.m in Sources */,
 				05BD09D6209FDFE000E18A38 /* CategoryListViewController.m in Sources */,
 				05BD09C9209FDCE600E18A38 /* KeepArray.m in Sources */,
 				05BD09C5209FDCE600E18A38 /* KeepTypes.m in Sources */,
@@ -384,6 +395,7 @@
 				05BD09C8209FDCE600E18A38 /* UIViewController+KeepLayout.m in Sources */,
 				05BD09EA20A0058300E18A38 /* EditViewController.m in Sources */,
 				05BD09D3209FDF3100E18A38 /* TransactionViewController.m in Sources */,
+				E35A912820A2BE3C00DFF6DB /* CategoryPickerViewController.m in Sources */,
 				05BD09E7209FFF7A00E18A38 /* Currency.m in Sources */,
 				05BD09C3209FDCE600E18A38 /* KeepLayoutConstraint.m in Sources */,
 				05BD09C6209FDCE600E18A38 /* KeepView.m in Sources */,
