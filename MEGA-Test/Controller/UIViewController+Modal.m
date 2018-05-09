@@ -13,8 +13,7 @@
 {
     controller.view.backgroundColor = [UIColor clearColor];
     controller.modalPresentationStyle = UIModalPresentationOverFullScreen;
-    [self presentViewController:controller animated:animated completion:^(void)
-    {
+    [self presentViewController:controller animated:animated completion:^(void) {
         controller.view.superview.backgroundColor = [UIColor clearColor];
     }];
 }
