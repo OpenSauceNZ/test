@@ -9,10 +9,11 @@
 #import "EditViewController.h"
 #import "EditTableSource.h"
 #import "EditViewCell.h"
+#import "UIViewController+Modal.h"
+#import "CategoryPickerViewController.h"
 
 @interface EditViewController () <EditTableDelgate>
 @property (nonatomic, strong) EditTableSource *datasource;
-@property (nonatomic, weak) UIPickerView *categoryPicker;
 @end
 
 @implementation EditViewController
@@ -118,6 +119,8 @@
 {
     [self.tableView endEditing:YES];
     // show category picker
+    CategoryPickerViewController *vc = [[CategoryPickerViewController alloc]init];
+    [self presentTransparentController:vc animated:NO];
 }
 
 @end
