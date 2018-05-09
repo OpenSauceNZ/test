@@ -9,7 +9,7 @@
 #import "CategoryListViewController.h"
 
 @interface CategoryListViewController ()
-
+@property (nonatomic) UITableView *tableView;
 @end
 
 @implementation CategoryListViewController

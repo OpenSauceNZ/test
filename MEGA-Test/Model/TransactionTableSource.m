@@ -44,7 +44,8 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    switch (self.sorttype) {
+    switch (self.sorttype)
+    {
         case SortByAll:
             return self.dataSourceArray.count;
             break;
@@ -71,18 +72,18 @@
         return nil;
     }
     UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 44)];
-    UILabel *lb = [[UILabel alloc]initWithFrame:CGRectMake(14, 0, 100, 44)];
-    [view addSubview:lb];
-    NSDictionary *dic;
+    UILabel *headerLabel = [[UILabel alloc]initWithFrame:CGRectMake(14, 0, 100, 44)];
+    [view addSubview:headerLabel];
+    NSDictionary *dict;
     switch (self.sorttype)
     {
         case SortByDay:
-            dic = self.dayData[section];
-            lb.text = dic[@"day"];
+            dict = self.dayData[section];
+            headerLabel.text = dict[@"day"];
             break;
         case SortByMonth:
-            dic = self.monthData[section];
-            lb.text = dic[@"month"];
+            dict = self.monthData[section];
+            headerLabel.text = dict[@"month"];
             break;
         default:
             break;
@@ -95,7 +96,8 @@
 {
     RecordViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kRecordDataCellId forIndexPath:indexPath];
     Transaction *eachTransaction;
-    switch (self.sorttype) {
+    switch (self.sorttype)
+    {
         case SortByAll:
             eachTransaction = self.dataSourceArray[indexPath.row];
             break;
@@ -110,7 +112,7 @@
     }
     cell.title.text = eachTransaction.name;
     NSDateFormatter *fm = [[NSDateFormatter alloc]init];
-    [fm setDateFormat:@"yyy-MM-dd HH:ss"];
+    [fm setDateFormat:@"yyy-MM-dd HH:mm"];
     cell.subTitle.text = [fm stringFromDate:eachTransaction.date];
     cell.amount.text = [NSString stringWithFormat:@"$%@", eachTransaction.amount];
     cell.currency.text = eachTransaction.currency.name;

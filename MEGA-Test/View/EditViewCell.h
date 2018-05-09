@@ -8,8 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+#define kEditTableCellId @"EditTableCell"
+#define kEditAmountCellId @"EditAmountCell"
+#define kEditCategoryCellId @"EditCategoryCell"
+#define kEditSegmentTableCellId @"EditSegmentTableCell"
+
 @interface EditViewCell : UITableViewCell
 @property (nonatomic) UILabel *title;
 @property (nonatomic) UITextField *contentField;
-
+@property (nonatomic) UISegmentedControl *currencySegment;
+@property (nonatomic) UIPickerView *dataPicker;
 @end
