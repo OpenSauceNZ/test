@@ -49,7 +49,13 @@
 {
     [super viewDidAppear:animated];
     self.title = @"Category";
-    self.tabBarController.navigationItem.rightBarButtonItem = nil;
+    UIBarButtonItem *addTransactionButton = [[UIBarButtonItem alloc] initWithTitle:@"Add" style:UIBarButtonItemStylePlain target:self action:@selector(addCategory)];
+    self.tabBarController.navigationItem.leftBarButtonItem = addTransactionButton;
+}
+
+- (void)addCategory
+{
+    
 }
 
 @end

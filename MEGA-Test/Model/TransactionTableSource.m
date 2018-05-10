@@ -114,7 +114,7 @@
     NSDateFormatter *fm = [[NSDateFormatter alloc]init];
     [fm setDateFormat:@"yyy-MM-dd HH:mm"];
     cell.subTitle.text = [fm stringFromDate:eachTransaction.date];
-    cell.amount.text = [NSString stringWithFormat:@"$%@", eachTransaction.amount];
+    cell.amount.text = [NSString stringWithFormat:@"$%@", eachTransaction.displayAmount];
     cell.currency.text = eachTransaction.currency.name;
     
     return cell;

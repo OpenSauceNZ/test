@@ -10,6 +10,7 @@
 #import <Realm/Realm.h>
 #import "Transaction.h"
 #import "EditViewCell.h"
+#import "CategoryPickerViewController.h"
 
 //typedef void(^PickerCallback)(NSInteger row, NSInteger component);
 typedef void(^CategoryCallback)(EditViewCell *cell);
@@ -27,6 +28,8 @@ typedef void(^CategoryCallback)(EditViewCell *cell);
 @property (nonatomic) BOOL isAddNewRecord;
 
 @property (nonatomic, copy) CategoryCallback callback;
+@property (nonatomic, strong) Category *seletedCategory;
+@property (nonatomic, strong) Currency *selectCurrency;
 
 - (id)initDataSourceWithTransaction:(Transaction *)trasaction delegate:(id)delegate;
 

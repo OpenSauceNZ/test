@@ -10,7 +10,10 @@
 #import "Transaction.h"
 #import "BaseViewController.h"
 
+typedef void(^CategoryDidSelectedCallback)(Category *selectedCategory);
+
 @interface EditViewController : UITableViewController
 @property (nonatomic) Transaction *transaction;
 @property (nonatomic) BOOL isNewRecord;
+@property (nonatomic, copy) CategoryDidSelectedCallback callback;
 @end

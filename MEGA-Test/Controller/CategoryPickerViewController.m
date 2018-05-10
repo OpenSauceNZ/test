@@ -37,7 +37,9 @@
 {
     [super viewDidLoad];
     self.category = [Category allObjects];
-    
+    // Default seleted
+    Category *select = self.category[0];
+    self.callback(select);
 }
 
 - (void)dismiss
@@ -62,6 +64,9 @@
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
-    
+    if (self.callback) {
+        Category *select = self.category[row];
+        self.callback(select);
+    }
 }
 @end

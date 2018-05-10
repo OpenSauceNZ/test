@@ -52,11 +52,17 @@
             break;
         case 2: // Currency
             cell = [tableView dequeueReusableCellWithIdentifier:kEditSegmentTableCellId forIndexPath:indexPath];
+            [cell.currencySegment addTarget:self action:@selector(segmentSwitch:) forControlEvents:UIControlEventValueChanged];
+            self.selectCurrency = [Currency objectForPrimaryKey:[NSNumber numberWithInteger:cell.currencySegment.selectedSegmentIndex]];
             break;
-        case 3:
+        case 3: // Category
             {
                 cell = [tableView dequeueReusableCellWithIdentifier:kEditCategoryCellId forIndexPath:indexPath];
                 self.callback(cell);
+                if (self.seletedCategory)
+                {
+                    cell.contentField.text = self.seletedCategory.name;
+                }
             }
             break;
         case 4: // Date
@@ -87,6 +93,15 @@
     {
         [self.delegate loadDetailsAtIndexPath:indexPath];
     }
+}
+
+#pragma mark -
+
+- (void)segmentSwitch:(id)sender
+{
+    UISegmentedControl *segmentedControl = (UISegmentedControl *)sender;
+    Currency *seleted = [Currency objectForPrimaryKey:[NSNumber numberWithInteger:segmentedControl.selectedSegmentIndex]];
+    self.selectCurrency = seleted;
 }
 
 @end

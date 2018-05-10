@@ -54,43 +54,63 @@
 
 - (void)save
 {
-    NSMutableArray *content = [[NSMutableArray alloc] init];
+    NSMutableArray<EditViewCell *> *content = [[NSMutableArray alloc] init];
     
     for (int i = 0; i < 6; i++)
     {
         NSIndexPath *index = [NSIndexPath indexPathForRow:i inSection:0];
         EditViewCell *cell = [self.tableView cellForRowAtIndexPath:index];
-        [content addObject:cell.contentField.text];
+        [content addObject:cell];
     }
     if (content.count > 0)
     {
         RLMResults *result = [Transaction allObjects];
         NSNumber *maxID = [NSNumber numberWithInt:(int)[result maxOfProperty:@"transactionId"]];
-        
         self.transaction.transactionId = [NSNumber numberWithInt:[maxID intValue] + 1];
-        self.transaction.name = content[0];
-        self.transaction.amount = [NSNumber numberWithInt:[content[1] intValue]];
-        if ([content[2] intValue] < 2)
+        self.transaction.name = content[0].contentField.text;
+        
+//        displayAmount
+        self.transaction.amount = [NSNumber numberWithInt:[content[1].contentField.text intValue]];
+        if (self.datasource.selectCurrency.currencyId == [NSNumber numberWithInt:1])
         {
-            self.transaction.currency = [Currency objectForPrimaryKey:[NSNumber numberWithInt:[content[2] intValue]]];
+            self.transaction.displayAmount = [NSNumber numberWithInt:99];// get after calculated money
+//            self.transaction.amount = [NSNumber numberWithInt:[content[1].contentField.text intValue]];
+        }
+        else
+        {
+            self.transaction.displayAmount = self.transaction.amount;
+        }
+        
+        if (self.datasource.selectCurrency)
+        {
+            self.transaction.currency = self.datasource.selectCurrency;
+        }
+        else
+        {
+            //error
+            assert(false);
+        }
+
+        if (self.datasource.seletedCategory)
+        {
+            self.transaction.category = self.datasource.seletedCategory;
         }
         else
         {
             assert(false);
         }
-
-        self.transaction.category = [Category objectForPrimaryKey:[NSNumber numberWithInt:0]];
-        self.transaction.date = [[NSDate alloc] init];
-        self.transaction.note = content[5];
+        
+        self.transaction.date = [NSDate date];
+        self.transaction.note = content[5].contentField.text;
         
         Category *category = [Category objectForPrimaryKey:[NSNumber numberWithInt:0]];
         
-        BOOL isVaildTransaction = ([category.budget intValue] - [content[1] intValue]) > 0;
+        BOOL isVaildTransaction = ([category.budget intValue] - [self.transaction.displayAmount intValue]) > 0;
         
         if (isVaildTransaction)
         {
             [[RLMRealm defaultRealm] beginWriteTransaction];
-            category.budget = [NSNumber numberWithInt:[category.budget intValue] - [content[1] intValue]];
+            category.budget = [NSNumber numberWithInt:[category.budget intValue] - [self.transaction.displayAmount intValue]];
             [[RLMRealm defaultRealm] addOrUpdateObject:category];
             [[RLMRealm defaultRealm] addObject:self.transaction];
             [[RLMRealm defaultRealm] commitWriteTransaction];
@@ -120,6 +140,10 @@
     [self.tableView endEditing:YES];
     // show category picker
     CategoryPickerViewController *vc = [[CategoryPickerViewController alloc]init];
+    vc.callback = ^(Category *selectedCategory) {
+        self.datasource.seletedCategory = selectedCategory;
+        [self.tableView reloadData];
+    };
     [self presentTransparentController:vc animated:NO];
 }
 
