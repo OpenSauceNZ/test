@@ -117,7 +117,6 @@ struct tab_bar_view_controller_data
 - (void)customizeTabBar
 {
     UITabBar *tabBar = self.tabBar;
-//    [[UITabBarItem appearance] setTitleTextAttributes:@{NSFontAttributeName:[[Theme font:FONT_T1] fontWithSize:9]} forState:UIControlStateNormal];
     
     tabBar.tintColor = [UIColor cyanColor];
     

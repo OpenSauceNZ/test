@@ -8,7 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "BaseViewController.h"
+#import "Category.h"
+
+typedef void(^CategorySelectedCallback)(Category *selectedCategory);
 
 @interface CategoryPickerViewController : BaseViewController
-
+@property (nonatomic, copy) CategorySelectedCallback callback;
 @end
