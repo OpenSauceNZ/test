@@ -31,6 +31,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    __weak __typeof__(self) weakSelf = self;
+    
     if (!self.transaction)
     {
         Transaction *record = [[Transaction alloc] init];
@@ -40,7 +42,7 @@
     [self.tableView registerClass:[EditViewCell class] forCellReuseIdentifier:kEditAmountCellId];
     [self.tableView registerClass:[EditViewCell class] forCellReuseIdentifier:kEditCategoryCellId];
     [self.tableView registerClass:[EditViewCell class] forCellReuseIdentifier:kEditSegmentTableCellId];
-    __weak __typeof__(self) weakSelf = self;
+    
     self.datasource = [[EditTableSource alloc] initDataSourceWithTransaction:self.transaction delegate:self];
     self.datasource.isAddNewRecord = self.isNewRecord;
     self.datasource.callback = ^(EditViewCell *cell) {
@@ -68,13 +70,18 @@
         NSNumber *maxID = [NSNumber numberWithInt:(int)[result maxOfProperty:@"transactionId"]];
         self.transaction.transactionId = [NSNumber numberWithInt:[maxID intValue] + 1];
         self.transaction.name = content[0].contentField.text;
+        if (content[1].contentField.text.length > 0)
+        {
+            self.transaction.amount = [NSNumber numberWithInt:[content[1].contentField.text intValue]];
+        }
+        else
+        {
+            [self alertError:@"Error" message:@"Please enter the amount"];
+        }
         
-//        displayAmount
-        self.transaction.amount = [NSNumber numberWithInt:[content[1].contentField.text intValue]];
         if (self.datasource.selectCurrency.currencyId == [NSNumber numberWithInt:1])
         {
-            self.transaction.displayAmount = [NSNumber numberWithInt:99];// get after calculated money
-//            self.transaction.amount = [NSNumber numberWithInt:[content[1].contentField.text intValue]];
+            self.transaction.displayAmount = [NSNumber numberWithInt:99];// TODO: get after calculated money
         }
         else
         {
@@ -87,8 +94,7 @@
         }
         else
         {
-            //error
-            assert(false);
+            [self alertError:@"Error" message:@"Please selete currency"];
         }
 
         if (self.datasource.seletedCategory)
@@ -97,7 +103,7 @@
         }
         else
         {
-            assert(false);
+            [self alertError:@"Error" message:@"Haven't selete category"];
         }
         
         self.transaction.date = [NSDate date];
@@ -114,7 +120,7 @@
             [[RLMRealm defaultRealm] addOrUpdateObject:category];
             [[RLMRealm defaultRealm] addObject:self.transaction];
             [[RLMRealm defaultRealm] commitWriteTransaction];
-            [self dismissViewControllerAnimated:YES completion:nil];
+            [self dismissViewControllerAnimated:YES completion:nil]; // TODO: after dismiss refresh Transaction page
         }
         else
         {
@@ -142,7 +148,7 @@
     CategoryPickerViewController *vc = [[CategoryPickerViewController alloc]init];
     vc.callback = ^(Category *selectedCategory) {
         self.datasource.seletedCategory = selectedCategory;
-        [self.tableView reloadData];
+        [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:3 inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
     };
     [self presentTransparentController:vc animated:NO];
 }
