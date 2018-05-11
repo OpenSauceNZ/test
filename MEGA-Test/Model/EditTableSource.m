@@ -95,7 +95,7 @@
     }
 }
 
-#pragma mark -
+#pragma mark - Other
 
 - (void)segmentSwitch:(id)sender
 {

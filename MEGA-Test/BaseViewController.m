@@ -9,8 +9,8 @@
 #import "BaseViewController.h"
 #import "EditViewController.h"
 
-@interface BaseViewController ()
 
+@interface BaseViewController ()
 @end
 
 @implementation BaseViewController

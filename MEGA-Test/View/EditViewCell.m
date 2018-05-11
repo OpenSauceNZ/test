@@ -43,6 +43,7 @@
             if ([reuseIdentifier isEqual:kEditAmountCellId])
             {
                 self.contentField.keyboardType = UIKeyboardTypeNumberPad;
+                self.contentField.delegate = self;
             }
         }
         self.selectionStyle = UITableViewCellSelectionStyleNone;

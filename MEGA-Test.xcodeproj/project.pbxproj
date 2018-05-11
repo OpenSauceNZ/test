@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0510149A20A474C000B80CAE /* Exchange.m in Sources */ = {isa = PBXBuildFile; fileRef = 0510149920A474C000B80CAE /* Exchange.m */; };
+		0510149D20A5342D00B80CAE /* BaseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0510149C20A5342D00B80CAE /* BaseTableViewController.m */; };
 		05BD099C209FDC2800E18A38 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05BD099B209FDC2800E18A38 /* AppDelegate.m */; };
 		05BD099F209FDC2800E18A38 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05BD099E209FDC2800E18A38 /* MainViewController.m */; };
 		05BD09A2209FDC2800E18A38 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 05BD09A0209FDC2800E18A38 /* Main.storyboard */; };
@@ -39,6 +41,10 @@
 
 /* Begin PBXFileReference section */
 		017C50468A80A6BCF3EDAB3D /* Pods-MEGA-Test.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MEGA-Test.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MEGA-Test/Pods-MEGA-Test.debug.xcconfig"; sourceTree = "<group>"; };
+		0510149820A474C000B80CAE /* Exchange.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Exchange.h; sourceTree = "<group>"; };
+		0510149920A474C000B80CAE /* Exchange.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Exchange.m; sourceTree = "<group>"; };
+		0510149B20A5342D00B80CAE /* BaseTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseTableViewController.h; sourceTree = "<group>"; };
+		0510149C20A5342D00B80CAE /* BaseTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseTableViewController.m; sourceTree = "<group>"; };
 		05832B284638D269935CC8F2 /* Pods-MEGA-Test.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MEGA-Test.release.xcconfig"; path = "Pods/Target Support Files/Pods-MEGA-Test/Pods-MEGA-Test.release.xcconfig"; sourceTree = "<group>"; };
 		05BD0997209FDC2800E18A38 /* MEGA-Test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MEGA-Test.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		05BD099A209FDC2800E18A38 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -138,6 +144,8 @@
 				05BD099B209FDC2800E18A38 /* AppDelegate.m */,
 				05BD09CB209FDD0A00E18A38 /* BaseViewController.h */,
 				05BD09CC209FDD0A00E18A38 /* BaseViewController.m */,
+				0510149B20A5342D00B80CAE /* BaseTableViewController.h */,
+				0510149C20A5342D00B80CAE /* BaseTableViewController.m */,
 				05BD09A0209FDC2800E18A38 /* Main.storyboard */,
 				05BD09A5209FDC2800E18A38 /* LaunchScreen.storyboard */,
 				05BD09D7209FE35300E18A38 /* Source */,
@@ -151,6 +159,8 @@
 		05BD09B0209FDC6800E18A38 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				0510149820A474C000B80CAE /* Exchange.h */,
+				0510149920A474C000B80CAE /* Exchange.m */,
 				05BD09DF209FFC8500E18A38 /* Transaction.h */,
 				05BD09E0209FFC8500E18A38 /* Transaction.m */,
 				05BD09E2209FFF3300E18A38 /* Category.h */,
@@ -379,12 +389,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				E35A912B20A2C3EC00DFF6DB /* UIViewController+Modal.m in Sources */,
+				0510149A20A474C000B80CAE /* Exchange.m in Sources */,
 				05BD09D6209FDFE000E18A38 /* CategoryListViewController.m in Sources */,
 				05BD09C9209FDCE600E18A38 /* KeepArray.m in Sources */,
 				05BD09C5209FDCE600E18A38 /* KeepTypes.m in Sources */,
 				05BD09E4209FFF3300E18A38 /* Category.m in Sources */,
 				05BD09E1209FFC8500E18A38 /* Transaction.m in Sources */,
 				05BD09CD209FDD0A00E18A38 /* BaseViewController.m in Sources */,
+				0510149D20A5342D00B80CAE /* BaseTableViewController.m in Sources */,
 				05BD099F209FDC2800E18A38 /* MainViewController.m in Sources */,
 				05EE033320A13275005ADC08 /* EditViewCell.m in Sources */,
 				05BD09C4209FDCE600E18A38 /* UIScrollView+KeepLayout.m in Sources */,

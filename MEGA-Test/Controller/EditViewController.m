@@ -42,7 +42,7 @@
     [self.tableView registerClass:[EditViewCell class] forCellReuseIdentifier:kEditAmountCellId];
     [self.tableView registerClass:[EditViewCell class] forCellReuseIdentifier:kEditCategoryCellId];
     [self.tableView registerClass:[EditViewCell class] forCellReuseIdentifier:kEditSegmentTableCellId];
-    
+    [self fetchJSON];
     self.datasource = [[EditTableSource alloc] initDataSourceWithTransaction:self.transaction delegate:self];
     self.datasource.isAddNewRecord = self.isNewRecord;
     self.datasource.callback = ^(EditViewCell *cell) {
@@ -67,21 +67,26 @@
     if (content.count > 0)
     {
         RLMResults *result = [Transaction allObjects];
+        BOOL completed = YES;
         NSNumber *maxID = [NSNumber numberWithInt:(int)[result maxOfProperty:@"transactionId"]];
         self.transaction.transactionId = [NSNumber numberWithInt:[maxID intValue] + 1];
         self.transaction.name = content[0].contentField.text;
+        
         if (content[1].contentField.text.length > 0)
         {
             self.transaction.amount = [NSNumber numberWithInt:[content[1].contentField.text intValue]];
         }
         else
         {
+            completed = NO;
             [self alertError:@"Error" message:@"Please enter the amount"];
         }
         
         if (self.datasource.selectCurrency.currencyId == [NSNumber numberWithInt:1])
         {
-            self.transaction.displayAmount = [NSNumber numberWithInt:99];// TODO: get after calculated money
+            float exchanged = [self.transaction.amount floatValue] * [self.exchange.nzdRate floatValue];
+            self.transaction.displayAmount = [NSNumber numberWithFloat:exchanged];// TODO: get after calculated money
+            
         }
         else
         {
@@ -94,6 +99,7 @@
         }
         else
         {
+            completed = NO;
             [self alertError:@"Error" message:@"Please selete currency"];
         }
 
@@ -103,6 +109,7 @@
         }
         else
         {
+            completed = NO;
             [self alertError:@"Error" message:@"Haven't selete category"];
         }
         
@@ -110,8 +117,7 @@
         self.transaction.note = content[5].contentField.text;
         
         Category *category = [Category objectForPrimaryKey:[NSNumber numberWithInt:0]];
-        
-        BOOL isVaildTransaction = ([category.budget intValue] - [self.transaction.displayAmount intValue]) > 0;
+        BOOL isVaildTransaction = ([category.budget intValue] - [self.transaction.displayAmount intValue]) > 0 && completed;
         
         if (isVaildTransaction)
         {
@@ -132,13 +138,6 @@
 - (void)cancel
 {
     [self dismissViewControllerAnimated:YES completion:nil];
-}
-
-- (void)alertError:(NSString *)title message:(NSString *)message
-{
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
-    [alert addAction:[UIAlertAction actionWithTitle:@"Back" style:UIAlertActionStyleCancel handler:nil]];
-    [self presentViewController:alert animated:YES completion:nil];
 }
 
 - (void)showCategoryPicker

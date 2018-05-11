@@ -16,5 +16,6 @@
 
 @interface BaseViewController : UIViewController
 @property (nonatomic) RLMRealm *realm;
-
+- (void)fetchJSON;
+- (void)alertError:(NSString *)title message:(NSString *)message;
 @end
