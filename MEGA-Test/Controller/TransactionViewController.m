@@ -44,67 +44,8 @@
     self.datasource = [[TransactionTableSource alloc]initDataSourceWithdArray:allTransaction delegate:self];
     self.datasource.categorySourceArray = nil;
     [self.tableView setDelegate:self.datasource];
-    [self.tableView setDataSource:self.datasource];
-    [self.tableView reloadData];
-    
-    // Test code
-    [self.realm beginWriteTransaction];
-    Currency *c = [[Currency alloc] init];
-    c.name = @"USD";
-    c.currencyId = [NSNumber numberWithInt:1];
-    [self.realm addOrUpdateObject:c];
+    [self.tableView setDataSource:self.datasource]; 
 
-    Currency *cz = [[Currency alloc] init];
-    cz.name = @"NZD";
-    cz.currencyId = [NSNumber numberWithInt:0];
-    [self.realm addOrUpdateObject:cz];
-
-    Transaction *record = [[Transaction alloc] init];
-    record.transactionId = [NSNumber numberWithInt:15];
-    record.name = @"testOther1";
-    record.date = [[NSDate alloc] init];
-    record.note = @"testtest";
-    record.amount = [NSNumber numberWithInt:50];
-    record.currency = [Currency objectForPrimaryKey:[NSNumber numberWithInt:1]];
-    RLMResults<Category *> *categories = [Category objectsWhere:@"name = 'Other'"];
-    record.category = categories[0];
-    [self.realm addOrUpdateObject:record];
-
-    Transaction *record1 = [[Transaction alloc] init];
-    {
-        record1.transactionId = [NSNumber numberWithInt:60];
-        record1.name = @"test";
-        record1.date = [[NSDate alloc] init];
-        record1.note = @"testtest";
-        record1.amount = [NSNumber numberWithInt:20];
-        record1.currency = [Currency objectForPrimaryKey:[NSNumber numberWithInt:0]];
-        RLMResults<Category *> *categories = [Category objectsWhere:@"name = 'Default'"];
-        record1.category = categories[0];
-    }
-
-    [self.realm addOrUpdateObject:record1];
-
-    Transaction *record2 = [[Transaction alloc] init];
-    {
-        [self.realm addObject:c];
-        record2.transactionId = [NSNumber numberWithInt:70];
-        record2.name = @"test";
-        record2.date = [[NSDate alloc] init];
-        record2.note = @"testtest";
-        record2.amount = [NSNumber numberWithInt:99];
-        record2.currency = [Currency objectForPrimaryKey:[NSNumber numberWithInt:0]];
-        
-        RLMResults<Category *> *categories = [Category objectsWhere:@"name = 'Default'"];
-        Category *target = categories[0];
-        target.budget = [NSNumber numberWithInt:target.budget.intValue - 99];
-        [self.realm addOrUpdateObject:target];
-        record2.category = target;
-    }
-
-    [self.realm addOrUpdateObject:record2];
-    // End
-    
-    [self.realm commitWriteTransaction];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -113,6 +54,7 @@
     self.title = @"Transaction";
     UIBarButtonItem *order = [[UIBarButtonItem alloc] initWithTitle:@"Sort" style:UIBarButtonItemStylePlain target:self action:@selector(sort)];
     self.tabBarController.navigationItem.rightBarButtonItem = order;
+    [self.tableView reloadData];
 }
 
 - (void)sort

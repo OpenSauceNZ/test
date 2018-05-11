@@ -13,7 +13,7 @@
 #define kEditCategoryCellId @"EditCategoryCell"
 #define kEditSegmentTableCellId @"EditSegmentTableCell"
 
-@interface EditViewCell : UITableViewCell
+@interface EditViewCell : UITableViewCell <UITextFieldDelegate>
 @property (nonatomic) UILabel *title;
 @property (nonatomic) UITextField *contentField;
 @property (nonatomic) UISegmentedControl *currencySegment;
